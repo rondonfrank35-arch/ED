@@ -208,7 +208,7 @@ def Ejercicio9():
         [2.8, 3.2, 3.5],
         [3.9, 4.5, 4.2]
     ]
-    
+
     # 1. Promedio de cada estudiante (filas)
     for i in range(len(notas)):
         prom = sum(notas[i]) / len(notas[i])
@@ -265,3 +265,4 @@ def Ejercicio10():
             aprobados = [e for e in estudiantes if e[2] >= 3.0]
             print("Aprobados:", aprobados)
 
+#prueba 11
