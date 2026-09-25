@@ -1,0 +1,40 @@
+class FIFO:
+    def __init__(self):
+        self.cola = []
+
+    def is_empty(self):
+        return len(self.cola) == 0  # Retorna True (vacía) o False (con datos)
+
+    def push(self, dato):
+        self.cola.append(dato)
+
+    def pop(self):
+        if self.is_empty():
+            return "Cola vacía"
+        return self.cola.pop(0)
+
+    def pek(self):
+        if self.is_empty():
+            return "Cola vacía"
+        return self.cola[0]
+
+
+# --- PRUEBA CON 3 DATOS ---
+c = FIFO()
+
+# 1. Insertar 3 datos (push)
+c.push("Dato 1")
+c.push("Dato 2")
+c.push("Dato 3")
+
+print("¿Está vacía?:", c.is_empty())  # False
+print("Frente de la cola (pek):", c.pek())  # Muestra "Dato 1"
+
+# 2. Extraer los 3 datos (pop en orden FIFO)
+print("Sale:", c.pop())  # Sale "Dato 1"
+print("Sale:", c.pop())  # Sale "Dato 2"
+print("Sale:", c.pop())  # Sale "Dato 3"
+
+# 3. Intento de extracción extra (evita error gracias a is_empty)
+print("Sale extra:", c.pop())         # "Cola vacía"
+print("¿Quedó vacía?:", c.is_empty())  # True
