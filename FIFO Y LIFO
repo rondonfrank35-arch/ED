@@ -1,28 +1,34 @@
-# --- FUNCIONES PRINCIPALES ---
+# =========================================================================
+# 1. FUNCIONES PRINCIPALES (Herramientas para manipular las listas)
+# =========================================================================
 
-def ape(lista, elemento):
-    """Agrega un elemento al final"""
-    lista.append(elemento)
+def ape(lista, elemento):                  # Define la función 'ape' que recibe la lista y el dato a guardar
+    lista.append(elemento)                 # .append() agrega el elemento al FINAL de la lista
 
-def remut(lista, posicion):
-    """Elimina según la posición (0 para el primero, -1 para el último)"""
-    if len(lista) == 0:
-        return "No hay elementos"
-    return lista.pop(posicion)
-
-
-# --- DATOS DEL SISTEMA ---
-fila_clientes = []  # Estructura FIFO
-pila_platos = []    # Estructura LIFO
+def remut(lista, posicion):                # Define la función 'remut' que recibe la lista y el índice a borrar
+    if len(lista) == 0:                    # Si len() es 0, significa que la lista no tiene datos
+        return "No hay elementos"          # Retorna un texto de aviso para evitar un error en el programa
+    return lista.pop(posicion)             # .pop(posicion) elimina y devuelve el elemento en esa posición
 
 
-# --- MENÚ INTERACTIVO ---
-while True:
+# =========================================================================
+# 2. DEFINICIÓN DE ESTRUCTURAS (Listas vacías para almacenar los datos)
+# =========================================================================
+
+fila_clientes = []                         # Lista vacía que funcionará como FIFO (Fila)
+pila_platos = []                           # Lista vacía que funcionará como LIFO (Pila)
+
+
+# =========================================================================
+# 3. MENÚ INTERACTIVO (Bucle principal del programa)
+# =========================================================================
+
+while True:                                # Mantiene el programa en ejecución repetida
     print("\n==================================")
     print("      CAFETERÍA INTERACTIVA")
     print("==================================")
-    print("Fila de clientes (FIFO) :", fila_clientes)
-    print("Pila de platos   (LIFO) :", pila_platos)
+    print("Fila de clientes (FIFO) :", fila_clientes)  # Muestra en pantalla los datos actuales de la fila
+    print("Pila de platos   (LIFO) :", pila_platos)    # Muestra en pantalla los datos actuales de la pila
     print("----------------------------------")
     print("1. Llega un cliente a la fila (ape)")
     print("2. Atender al primer cliente  (remut en posición 0)")
@@ -31,28 +37,31 @@ while True:
     print("5. Salir")
     print("==================================")
     
-    opcion = input("Elige una opción (1-5): ")
+    opcion = input("Elige una opción (1-5): ") # Pide al usuario escribir una opción del menú
 
-    if opcion == "1":
-        nombre = input("Nombre del cliente: ")
-        ape(fila_clientes, nombre)
+    # --- LÓGICA DE LAS OPCIONES ---
+
+    if opcion == "1":                      # Si eligió la opción 1 (Agregar cliente)
+        nombre = input("Nombre del cliente: ") # Lee el nombre escrito por teclado
+        ape(fila_clientes, nombre)         # Llama a 'ape' para poner el cliente AL FINAL de la fila
         print("-> Cliente agregado a la fila.")
 
-    elif opcion == "2":
-        atendido = remut(fila_clientes, 0)
-        print("-> Se atendió a:", atendido)
+    elif opcion == "2":                    # Si eligió la opción 2 (Atender cliente - FIFO)
+        atendido = remut(fila_clientes, 0) # Llama a 'remut' en POSICIÓN 0 (saca al PRIMERO que llegó)
+        print("-> Se atendió a:", atendido) # Muestra en pantalla el nombre del cliente atendido
 
-    elif opcion == "3":
-        plato = input("Descripción del plato: ")
-        ape(pila_platos, plato)
+    elif opcion == "3":                    # Si eligió la opción 3 (Agregar plato)
+        plato = input("Descripción del plato: ") # Lee el nombre/tipo de plato
+        ape(pila_platos, plato)            # Llama a 'ape' para poner el plato ARRIBA de la pila
         print("-> Plato colocado arriba en la pila.")
 
-    elif opcion == "4":
-        usado = remut(pila_platos, -1)
-        print("-> Se tomó el plato:", usado)
+    elif opcion == "4":                    # Si eligió la opción 4 (Usar plato - LIFO)
+        usado = remut(pila_platos, -1)     # Llama a 'remut' en POSICIÓN -1 (saca el ÚLTIMO agregado)
+        print("-> Se tomó el plato:", usado) # Muestra en pantalla qué plato se extrajo
 
-    elif opcion == "5":
-        print("Saliendo del programa...")
-        break
-    else:
-        print("Opción no válida, intenta de nuevo.")
+    elif opcion == "5":                    # Si eligió la opción 5 (Salir)
+        print("Saliendo del programa...")  # Mensaje de despedida
+        break                              # 'break' rompe el ciclo 'while' y finaliza el programa
+
+    else:                                  # Si escribió un número fuera del rango 1-5
+        print("Opción no válida, intenta de nuevo.") # Aviso de error en la opción
