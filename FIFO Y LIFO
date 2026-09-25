@@ -1,0 +1,58 @@
+# --- FUNCIONES PRINCIPALES ---
+
+def ape(lista, elemento):
+    """Agrega un elemento al final"""
+    lista.append(elemento)
+
+def remut(lista, posicion):
+    """Elimina según la posición (0 para el primero, -1 para el último)"""
+    if len(lista) == 0:
+        return "No hay elementos"
+    return lista.pop(posicion)
+
+
+# --- DATOS DEL SISTEMA ---
+fila_clientes = []  # Estructura FIFO
+pila_platos = []    # Estructura LIFO
+
+
+# --- MENÚ INTERACTIVO ---
+while True:
+    print("\n==================================")
+    print("      CAFETERÍA INTERACTIVA")
+    print("==================================")
+    print("Fila de clientes (FIFO) :", fila_clientes)
+    print("Pila de platos   (LIFO) :", pila_platos)
+    print("----------------------------------")
+    print("1. Llega un cliente a la fila (ape)")
+    print("2. Atender al primer cliente  (remut en posición 0)")
+    print("3. Apilar un plato limpio     (ape)")
+    print("4. Usar el plato de arriba    (remut en posición -1)")
+    print("5. Salir")
+    print("==================================")
+    
+    opcion = input("Elige una opción (1-5): ")
+
+    if opcion == "1":
+        nombre = input("Nombre del cliente: ")
+        ape(fila_clientes, nombre)
+        print("-> Cliente agregado a la fila.")
+
+    elif opcion == "2":
+        atendido = remut(fila_clientes, 0)
+        print("-> Se atendió a:", atendido)
+
+    elif opcion == "3":
+        plato = input("Descripción del plato: ")
+        ape(pila_platos, plato)
+        print("-> Plato colocado arriba en la pila.")
+
+    elif opcion == "4":
+        usado = remut(pila_platos, -1)
+        print("-> Se tomó el plato:", usado)
+
+    elif opcion == "5":
+        print("Saliendo del programa...")
+        break
+    else:
+        print("Opción no válida, intenta de nuevo.")
