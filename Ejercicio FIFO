@@ -1,40 +1,64 @@
 class FIFO:
     def __init__(self):
-        self.cola = []
+        self.cola = []  # Lista para almacenar los clientes en espera
 
     def is_empty(self):
-        return len(self.cola) == 0  # Retorna True (vacía) o False (con datos)
+        return len(self.cola) == 0  # Retorna True si no hay clientes
 
-    def push(self, dato):
-        self.cola.append(dato)
+    def push(self, cliente):
+        self.cola.append(cliente)  # Agrega el nuevo cliente al final de la fila
 
     def pop(self):
         if self.is_empty():
-            return "Cola vacía"
-        return self.cola.pop(0)
+            return "No hay clientes en espera"
+        return self.cola.pop(0)  # Atiende al PRIMER cliente que llegó (FIFO)
 
     def pek(self):
         if self.is_empty():
-            return "Cola vacía"
-        return self.cola[0]
+            return "Fila vacía"
+        return self.cola[0]  # Muestra al siguiente cliente sin eliminarlo
 
 
-# --- PRUEBA CON 3 DATOS ---
-c = FIFO()
+# --- INICIALIZACIÓN DEL SISTEMA ---
+banco = FIFO()
+contador_turno = 1
 
-# 1. Insertar 3 datos (push)
-c.push("Dato 1")
-c.push("Dato 2")
-c.push("Dato 3")
+# Llegada de las 5 personas iniciales
+personas_iniciales = ["Carlos", "María", "Andrés", "Laura", "Pedro"]
 
-print("¿Está vacía?:", c.is_empty())  # False
-print("Frente de la cola (pek):", c.pek())  # Muestra "Dato 1"
+for nombre in personas_iniciales:
+    turno = f"T-{contador_turno}: {nombre}"
+    banco.push(turno)
+    contador_turno += 1
 
-# 2. Extraer los 3 datos (pop en orden FIFO)
-print("Sale:", c.pop())  # Sale "Dato 1"
-print("Sale:", c.pop())  # Sale "Dato 2"
-print("Sale:", c.pop())  # Sale "Dato 3"
+# --- MENÚ INTERACTIVO ---
+while True:
+    print("\n==============================================")
+    print("         DIGITURNO BANCO - SISTEMA FIFO      ")
+    print("==============================================")
+    print("Clientes en espera :", banco.cola)
+    print("Siguiente a módulo  :", banco.pek())
+    print("----------------------------------------------")
+    print("1. Tomar turno             (Nuevo cliente -> push)")
+    print("2. Llamar cliente a caja   (Atención       -> pop)")
+    print("3. Salir del sistema")
+    print("==============================================")
+    
+    opc = input("Seleccione una opción (1-3): ")
 
-# 3. Intento de extracción extra (evita error gracias a is_empty)
-print("Sale extra:", c.pop())         # "Cola vacía"
-print("¿Quedó vacía?:", c.is_empty())  # True
+    if opc == "1":
+        nombre = input("Ingrese el nombre del cliente: ")
+        nuevo_turno = f"T-{contador_turno}: {nombre}"
+        banco.push(nuevo_turno)
+        print(f"-> ¡Turno asignado!: {nuevo_turno}")
+        contador_turno += 1
+
+    elif opc == "2":
+        atendido = banco.pop()
+        print(f"-> Atendiendo en Caja al cliente: {atendido}")
+
+    elif opc == "3":
+        print("Cerrando el sistema del banco...")
+        break
+    else:
+        print("Opción no válida. Intente de nuevo.")
