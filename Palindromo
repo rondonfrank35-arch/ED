@@ -1,0 +1,52 @@
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+import java.util.Stack;
+
+public class PalindromoFifoLifo {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Ingrese un nombre o palabra: ");
+        String palabra = scanner.nextLine().trim().toLowerCase();
+
+        // FIFO: Queue (LinkedList) -> El primero que entra es el primero que sale
+        Queue<Character> fifo = new LinkedList<>();
+
+        // LIFO: Stack -> El último que entra es el primero que sale
+        Stack<Character> lifo = new Stack<>();
+
+        // Insertar cada letra en ambas estructuras (push / offer)
+        for (char letra : palabra.toCharArray()) {
+            fifo.offer(letra); // Agrega al final de la cola (FIFO)
+            lifo.push(letra);  // Agrega a la cima de la pila (LIFO)
+        }
+
+        boolean esPalindromo = true;
+
+        System.out.println("\n--- COMPARANDO LETRA A LETRA ---");
+
+        // Compara mientras ambas estructuras NO estén vacías
+        while (!fifo.isEmpty() && !lifo.isEmpty()) {
+            char letraInicio = fifo.poll(); // Extrae desde el inicio (FIFO)
+            char letraFin = lifo.pop();     // Extrae desde el final (LIFO)
+
+            System.out.println("Inicio (FIFO): " + letraInicio + " | Fin (LIFO): " + letraFin);
+
+            if (letraInicio != letraFin) {
+                esPalindromo = false;
+                System.out.println("-> ¡Las letras no coinciden!");
+                break; // Se detiene al encontrar una diferencia
+            }
+        }
+
+        System.out.println("--------------------------------");
+        if (esPalindromo) {
+            System.out.println("¡RESULTADO!: '" + palabra + "' SÍ es un palíndromo.");
+        } else {
+            System.out.println("¡RESULTADO!: '" + palabra + "' NO es un palíndromo.");
+        }
+
+        scanner.close();
+    }
+}s
