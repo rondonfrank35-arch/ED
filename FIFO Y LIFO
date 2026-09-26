@@ -10,14 +10,12 @@ def remut(lista, posicion):                # Define la función 'remut' que reci
         return "No hay elementos"          # Retorna un texto de aviso para evitar un error en el programa
     return lista.pop(posicion)             # .pop(posicion) elimina y devuelve el elemento en esa posición
 
-
 # =========================================================================
 # 2. DEFINICIÓN DE ESTRUCTURAS (Listas vacías para almacenar los datos)
 # =========================================================================
 
 fila_clientes = []                         # Lista vacía que funcionará como FIFO (Fila)
 pila_platos = []                           # Lista vacía que funcionará como LIFO (Pila)
-
 
 # =========================================================================
 # 3. MENÚ INTERACTIVO (Bucle principal del programa)
