@@ -1,0 +1,12 @@
+def invertir_palabra(palabra):
+    # Caso base: si la palabra tiene 1 letra o ninguna, se devuelve tal cual
+    if len(palabra) <= 1:
+        return palabra
+    
+    # Caso recursivo: tomar la última letra + invertir el resto del texto
+    return palabra[-1] + invertir_palabra(palabra[:-1])
+
+# Ejemplo de uso
+texto = "hola"
+print("Palabra invertida:", invertir_palabra(texto))
+# Salida: aloh

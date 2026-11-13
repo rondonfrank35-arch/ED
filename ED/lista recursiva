@@ -1,0 +1,14 @@
+def sumar_lista(lista):
+    # Caso Base: Si no quedan elementos en la lista, sumamos 0
+    if len(lista) == 0:
+        return 0
+    
+    # Caso Recursivo: Primer elemento + suma del resto de la lista
+    primer_numero = lista[0]
+    resto_de_lista = lista[1:]
+    
+    return primer_numero + sumar_lista(resto_de_lista)
+
+# Prueba
+mi_lista = [10, 20, 30]
+print(sumar_lista(mi_lista))  # Resultado: 60s

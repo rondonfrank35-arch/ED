@@ -1,0 +1,16 @@
+
+class Fibonacci:
+
+    def calcular(self, n):
+        if n == 0:
+            return 0
+        elif n == 1:
+            return 1
+        else:
+            return self.calcular(n - 1) + self.calcular(n - 2)
+
+
+numero = int(input("Cuantos numeros de Fibonacci desea: "))
+objeto = Fibonacci()
+for i in range(numero):
+    print(objeto.calcular(i), end=" ")

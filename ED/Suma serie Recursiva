@@ -1,0 +1,17 @@
+def sumar_digitos(numero):
+    # Caso Base: si el número tiene un solo dígito
+    if numero < 10:
+        return numero
+    
+    # Caso Recursivo: último dígito + el resto del número
+    ultimo = numero % 10
+    resto = numero // 10
+    
+    return ultimo + sumar_digitos(resto)
+
+numero_ingresado = int(input("Ingresa un número: "))
+
+# 2. Llamar a la función con el número digitado
+resultado = sumar_digitos(numero_ingresado)
+
+print("La suma de sus dígitos es:", resultado)

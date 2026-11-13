@@ -1,0 +1,42 @@
+class Nodo:
+    def __init__(self, dato):
+        self.dato = dato
+        self.siguiente = None
+
+class ListaEnlazada:
+    def __init__(self):
+        self.cabeza = None
+
+    def insertarInicio(self, dato):
+        nuevo = Nodo(dato)
+        nuevo.siguiente = self.cabeza
+        self.cabeza = nuevo
+
+    def mostrar(self, posicion):
+        actual = self.cabeza
+        i = 1
+        while actual is not None:
+            if posicion == 0 or posicion == i:
+                print(actual.dato)
+            actual = actual.siguiente
+            i += 1
+
+# --- Menú y Ejecución ---
+lista = ListaEnlazada()
+tope = int(input("¿Cuántos números desea ingresar? "))
+
+for i in range(tope):
+    dato = int(input("Ingrese un número: "))
+    lista.insertarInicio(dato)
+
+print("1. Mostrar todos")
+print("2. Mostrar una posición")
+opcion = int(input("Elija una opción: "))
+
+if opcion == 1:
+    lista.mostrar(0)
+elif opcion == 2:
+    posicion = int(input("¿Qué posición desea mostrar? "))
+    lista.mostrar(posicion)
+else:
+    print("Opción no válida")

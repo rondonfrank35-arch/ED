@@ -1,0 +1,13 @@
+matriz=print("Ingrese el tamaño de las matrices (NxN)")
+n = int(input("N = "))
+filas=len(matriz)
+i=filas-1
+while i >=0:
+    columnas = len (matriz[i])
+    j=columnas -1
+    while j>=0:
+        print(matriz[i][j], end ="")
+        j-=1
+    print()
+    i-=1
+

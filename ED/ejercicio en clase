@@ -1,0 +1,19 @@
+
+class Factorial:
+
+    def calcular_factorial(self, n):
+        if n == 0 or n == 1:
+            return 1
+        else:
+            return n * self.calcular_factorial(n - 1)
+
+
+numero = int(input("Ingrese un numero: "))
+
+objeto = Factorial()
+
+resultado = objeto.calcular_factorial(numero)
+
+print("El factorial es:", resultado)
+
+

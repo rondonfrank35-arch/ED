@@ -1,0 +1,56 @@
+
+class Nodo:
+    def __init__(self, dato):
+        self.dato = dato
+        self.siguiente = None
+
+
+def insertar(lista, dato, posicion):
+    nuevo = Nodo(dato)
+
+    if posicion == 1:
+        nuevo.siguiente = lista
+        return nuevo
+
+    actual = lista
+
+    for i in range(posicion - 2):
+        if actual is None:
+            print("Posicion no valida")
+            return lista
+        actual = actual.siguiente
+
+    if actual is None:
+        print("Posicion no valida")
+        return lista
+
+    nuevo.siguiente = actual.siguiente
+    actual.siguiente = nuevo
+
+    return lista
+
+
+def mostrar(lista):
+    actual = lista
+
+    while actual is not None:
+        print(actual.dato, end=" -> ")
+        actual = actual.siguiente
+
+    print("None")
+
+
+lista = Nodo(10)
+lista.siguiente = Nodo(20)
+lista.siguiente.siguiente = Nodo(30)
+
+print("Lista original:")
+mostrar(lista)
+
+dato = int(input("Ingrese el dato: "))
+posicion = int(input("Ingrese la posicion: "))
+
+lista = insertar(lista, dato, posicion)
+
+print("Lista actualizada:")
+mostrar(lista)

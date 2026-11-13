@@ -1,0 +1,111 @@
+class Nodo:
+    def __init__(self, dato):
+        self.dato = dato
+        self.izquierdo = None
+        self.derecho = None
+
+class ArbolBinarioBusqueda:
+    def __init__(self):
+        self.raiz = None
+
+    def insertar(self, dato):
+        if self.raiz is None:
+            self.raiz = Nodo(dato)
+        else:
+            self._insertar_recursivo(self.raiz, dato)
+
+    def _insertar_recursivo(self, actual, dato):
+        if dato == actual.dato: return
+        if dato < actual.dato:
+            if actual.izquierdo is None: actual.izquierdo = Nodo(dato)
+            else: self._insertar_recursivo(actual.izquierdo, dato)
+        else:
+            if actual.derecho is None: actual.derecho = Nodo(dato)
+            else: self._insertar_recursivo(actual.derecho, dato)
+
+    def buscar(self, dato):
+        return self._buscar_recursivo(self.raiz, dato)
+
+    def _buscar_recursivo(self, actual, dato):
+        if actual is None: return False
+        if actual.dato == dato: return True
+        if dato < actual.dato: return self._buscar_recursivo(actual.izquierdo, dato)
+        return self._buscar_recursivo(actual.derecho, dato)
+
+    def inorden(self, actual):
+        if actual is not None:
+            self.inorden(actual.izquierdo)
+            print(actual.dato, end=" ")
+            self.inorden(actual.derecho)
+
+    # Métodos de la Parte 5
+    def contar_nodos(self): return self.contar(self.raiz)
+    def contar(self, nodo):
+        if nodo is None: return 0
+        return 1 + self.contar(nodo.izquierdo) + self.contar(nodo.derecho)
+
+    def minimo(self):
+        nodo = self.raiz
+        while nodo and nodo.izquierdo: nodo = nodo.izquierdo
+        return nodo.dato if nodo else None
+
+    def maximo(self):
+        nodo = self.raiz
+        while nodo and nodo.derecho: nodo = nodo.derecho
+        return nodo.dato if nodo else None
+
+    def altura(self): return self.altura_arbol(self.raiz)
+    def altura_arbol(self, nodo):
+        if nodo is None: return 0
+        return 1 + max(self.altura_arbol(nodo.izquierdo), self.altura_arbol(nodo.derecho))
+
+# --- PARTE 6: MENÚ DE ESTUDIANTES ---
+arbol = ArbolBinarioBusqueda()
+opcion = ""
+
+while opcion != "7":
+    print("\n--- MENU DE ESTUDIANTES ---")
+    print("1. Registrar codigo")
+    print("2. Buscar codigo")
+    print("3. Mostrar codigos ordenados")
+    print("4. Cantidad de codigos")
+    print("5. Codigo menor")
+    print("6. Codigo mayor")
+    print("7. Salir")
+    opcion = input("Seleccione una opcion: ").strip()
+
+    try:
+        if opcion == "1":
+            cod = int(input("Ingrese el codigo: "))
+            if arbol.buscar(cod):
+                print(f"El codigo {cod} ya existe.")
+            else:
+                arbol.insertar(cod)
+                print("Codigo registrado con exito.")
+
+        elif opcion == "2":
+            cod = int(input("Ingrese el codigo a buscar: "))
+            print("Resultado:", "Existe" if arbol.buscar(cod) else "No existe")
+
+        elif opcion == "3":
+            print("Codigos ordenados: ", end="")
+            arbol.inorden(arbol.raiz)
+            print()
+
+        elif opcion == "4":
+            print("Cantidad de codigos:", arbol.contar_nodos())
+
+        elif opcion == "5":
+            print("Codigo menor:", arbol.minimo())
+
+        elif opcion == "6":
+            print("Codigo mayor:", arbol.maximo())
+
+        elif opcion == "7":
+            print("Saliendo...")
+
+        else:
+            print("Opcion no valida.")
+
+    except ValueError:
+        print("Error: Ingrese solo numeros enteros.")

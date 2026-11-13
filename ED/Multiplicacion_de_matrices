@@ -1,0 +1,34 @@
+# ...existing code...
+
+print("Ingrese el tamaño de las matrices (NxN)")
+n = int(input("N = "))
+
+def leer_matriz(nombre, n):
+    matriz = []
+    for i in range(n):
+        fila = []
+        for j in range(n):
+            valor = int(input(f"{nombre}[{i}][{j}] = "))
+            fila.append(valor)
+        matriz.append(fila)
+    return matriz
+
+print("Matriz A")
+A = leer_matriz("A", n)
+
+print("Matriz B")
+B = leer_matriz("B", n)
+
+# Multiplicación de matrices usando ciclos
+R = [[0 for _ in range(n)] for _ in range(n)]
+
+for i in range(n):
+    for j in range(n):
+        suma = 0
+        for k in range(n):
+            suma += A[i][k] * B[k][j]
+        R[i][j] = suma
+
+print("Matriz A:", A)
+print("Matriz B:", B)
+print("Matriz resultado:", R)
